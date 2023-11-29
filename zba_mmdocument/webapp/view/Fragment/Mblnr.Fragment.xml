@@ -1,0 +1,36 @@
+<c:FragmentDefinition 
+    xmlns:t="sap.ui.table"
+    xmlns:c="sap.ui.core"
+    xmlns="sap.m">
+
+    <Dialog id="idDialog1" title="조회 조건"
+			beforeOpen="onBeforeOpen1"
+			resizable="true"
+			draggable="true"
+            contentHeight="50%"
+            contentWidth="20%"
+            > <!-- 사이즈 단위는 %(브라우저 크기에 따라 조정, px(작은 단위), rem, em -->
+        <content>
+				<t:Table 
+                    rowSelectionChange="onRowChange1"
+					id="idMblnrTable"
+					rows="{/ZBA_MMT110Set}"
+					visibleRowCount="13."
+					paste="onPaste"
+					ariaLabelledBy="title"
+                    selectionBehavior="RowOnly">
+					<t:columns>
+						<t:Column>
+							<Label text="자재 문서 번호" />	
+							<t:template>
+								<Text text="{MBLNR}" wrapping="false" />
+							</t:template>
+						</t:Column>
+					</t:columns>
+				</t:Table>
+        </content>
+        <endButton>
+            <Button text="Close" press="onClose" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

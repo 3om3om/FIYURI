@@ -1,0 +1,98 @@
+<mvc:View controllerName="MM.zbammedate.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:unified="sap.ui.unified"
+	xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns="sap.m">
+	<ScrollContainer height="100%" width="100%" vertical="true"> <!-- 달력 스크롤 가능-->
+	    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="[FIYURI-MM] 원자재/부자재 입고 예정일"/>
+					</f:heading>
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<fb:FilterBar id="filterbar" persistencyKey="myPersKey" 
+					useToolbar="false" 
+					search="onSearch"
+					filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+						<fb:filterGroupItems>
+							<fb:FilterGroupItem name="MATNR" label="자재번호" groupName="Group1" visibleInFilterBar="true">
+								<fb:control>
+									<ComboBox
+									id="idCombobox3"
+									name="MATNR"
+									showSecondaryValues= "true"   
+									items="{view>/list3}"
+									width="100%"
+									change="onCombobox3">
+									<core:Item key="" text="{view>MATNR}" />
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="MTART" label="자재유형" groupName="Group1" visibleInFilterBar="true">
+								<fb:control>
+									<ComboBox
+									id="idCombobox1"
+									name="MTART"
+									showSecondaryValues= "true"   
+									items="{view>/list1}"
+									width="100%"
+									change="onCombobox1">
+									<core:Item key="" text="{view>MTART}" />
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="BWART" label="이동유형" groupName="Group1" visibleInFilterBar="true">
+								<fb:control>
+									<ComboBox
+									id="idCombobox2"
+									name="BWART"
+									showSecondaryValues= "true"   
+									items="{view>/list2}"
+									width="100%"
+									change="onCombobox2"
+									value="001: 원자재 미입고">
+									<core:Item key="" text="{view>BWART}" />									
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+			<VBox class="sapUiSmallMargin">
+				<SinglePlanningCalendar
+					id="SPC1"
+					class="sapUiSmallMarginTop"
+					appointments="{path: '/ZBA_MMT100Set'}"
+					appointmentSelect="onbeforeDialog"
+					moreLinkPress="onmoreLinkPress">
+					<views>
+						<SinglePlanningCalendarMonthView key="MonthView" title="Month" />
+					</views>
+					<appointments>
+						<unified:CalendarAppointment
+							title= "{EBELN}"
+							text= "{text}"
+							type= "Type01"
+							icon= "{= ${BWART} === '001' ? 'sap-icon://shipping-status' : 'sap-icon://home'}"
+							color="{= ${BWART} === '001' ? '#FF007F' : '#FFE08C'}"
+							startDate= "{DDATE}"
+							endDate= "{DDATE}"			
+						>
+						</unified:CalendarAppointment>
+					</appointments>
+				</SinglePlanningCalendar>
+			</VBox>
+			</f:content>
+		</f:DynamicPage>
+	</ScrollContainer>
+</mvc:View>

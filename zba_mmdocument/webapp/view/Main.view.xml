@@ -1,0 +1,116 @@
+<mvc:View controllerName="MM.zbammdocument.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m">
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+			<!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="[FIYURI-MM] 자재 문서 조회"/>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <fb:FilterBar id="filterbar" persistencyKey="myPersKey" 
+                useToolbar="false" search="onSearch"
+                filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem name="MBLNR" label="자재문서번호" groupName="Group1" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input id="idInput1" valueHelpRequest="onValueHelp1" showValueHelp="true" />
+							 </fb:control>
+                        </fb:FilterGroupItem>
+                       <fb:FilterGroupItem name="BWART" label="이동유형" groupName="Group1" visibleInFilterBar="true">
+								<fb:control>
+									<ComboBox
+									id="idCombobox"
+									name="BWART"
+									showSecondaryValues= "true"   
+									items="{view>/list}"
+									width="100%"
+									change="onCombobox">
+									<core:Item key="" text="{view>BWART}" />
+									</ComboBox>
+								</fb:control>
+							</fb:FilterGroupItem>
+                        <fb:FilterGroupItem name="CDATE" label="문서생성일" groupName="Group1" visibleInFilterBar="true">
+                            <fb:control>
+                                <DateRangeSelection id="idInput3" displayFormat="yyyy-MM-dd"/>
+                                <!-- From-To가 아니라 단일 날짜 형태면 DatePicker 사용. 위에는 From-To -->
+                            </fb:control>
+                        </fb:FilterGroupItem>                                             
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+        	<!-- sap.m.Table 추가해서, 데이터 바인딩-->
+            <VBox width="100%">
+                <Table id="idDocumentList"
+                    inset="false"
+                    mode="SingleSelectMaster"
+                    items="{/ZBA_MMT110Set}"
+                    selectionChange="onSelectionChange">
+                    <!-- <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="자재문서H"/>
+                            <ToolbarSpacer />
+                        </OverflowToolbar>
+                    </headerToolbar> -->
+                    <columns>
+                        <Column>
+                            <Text text="자재문서번호"/>
+                        </Column>
+                        <Column>
+                            <Text text="이동유형"/>
+                        </Column>
+                        <Column>
+                            <Text text="이동유형설명" />
+                        </Column>
+                        <Column>
+                            <Text text="창고번호" />
+                        </Column>
+                        <Column>
+                            <Text text="구매오더번호"/>
+                        </Column>
+                        <Column>
+                            <Text text="생산오더번호" />
+                        </Column>
+                        <Column>
+                            <Text text="출하문서번호" />
+                        </Column>
+                        <Column>
+                            <Text text="문서 생성일"/>
+                        </Column>			
+                        <Column>
+                            <Text text="생성자" />
+                        </Column>	
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{MBLNR}" />
+                                <Text text="{BWART}" />
+                                <Text text="{BTEXT}" />
+                                <Text text="{WHCODE}" />
+                                <Text text="{EBELN}" />
+                                <Text text="{HORDER}" />
+                                <Text text="{SHDNR}" />
+                                <Text text="{path : 'CDATE',
+									formatter : '.formatter.fnDateString'
+									}"/>
+                                <Text text="{PERNR}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>

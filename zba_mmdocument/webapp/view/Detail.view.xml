@@ -1,0 +1,98 @@
+<mvc:View controllerName="MM.zbammdocument.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout">
+
+			<Page title="[FIYURI-MM] 자재 문서 상세 정보" 
+            showNavButton="true" 
+            navButtonPress="onNavMain">
+				
+				<VBox width="100%" >
+					<Table id="idDocumentItemList"
+						inset="false"
+						mode="SingleSelectMaster"
+						items="{/results}"
+						selectionChange="onSelectionChange">
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="상세 정보"/>
+								<ToolbarSpacer />
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="7rem" minScreenWidth="Tablet">
+								<Text text="자재문서번호"/>
+							</Column>
+							<Column>
+								<Text text="자재번호"/>
+							</Column>
+							<Column>
+								<Text text="자재유형" />
+							</Column>
+							<Column width="8rem" minScreenWidth="Tablet">
+								<Text text="자재명" />
+							</Column>
+							<Column>
+								<Text text="수량"/>
+							</Column>
+							<Column>
+								<Text text="단가" />
+							</Column>
+							<Column>
+								<Text text="총 비용"/>
+							</Column>			
+							<Column>
+								<Text text="입고일" />
+							</Column>
+							<Column>
+								<Text text="출고일" />
+							</Column>
+							<Column>
+								<Text text="벤더번호"/>
+							</Column>
+							<Column >
+								<Text text="벤더명" />
+							</Column>
+							<!-- <Column>
+								<Text text="회사번호" />
+							</Column> -->
+							<Column>
+								<Text text="회계연도"/>
+							</Column>			
+							<Column>
+								<Text text="전표번호" />
+							</Column>	
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{MBLNR}" />
+									<Text text="{MATNR}" />
+									<Text text="{MTART}" />
+									<Text text="{MATNM}" />
+									<Text text="{
+                                    path : 'QUANT',
+                                    formatter : '.formatter2.fnNumberString'} EA" />
+									<Text text="{
+                                    path : 'NETPR',
+                                    formatter : '.formatter2.fnNumberString'} 원" />
+									<Text text="{
+                                    path : 'TOAMT',
+                                    formatter : '.formatter2.fnNumberString'} 원" />
+									<Text text="{INDAT}" />
+									<Text text="{OUTDAT}" />
+									<Text text="{VENNR}" />
+									<Text text="{VENNM}" />
+									<!-- <Text text="{BUKRS}" /> -->
+									<Text text="{GJAHR}" />
+									<Text text="{BELNR}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</VBox>
+			
+		</Page>		
+</mvc:View>

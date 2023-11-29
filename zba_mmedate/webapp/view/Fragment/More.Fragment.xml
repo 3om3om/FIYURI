@@ -1,0 +1,76 @@
+<c:FragmentDefinition 
+    xmlns:t="sap.ui.table"
+    xmlns:c="sap.ui.core"
+    xmlns="sap.m">
+
+    <Dialog id="idMoreDialog" title="원/부자재 입고 예정 정보"
+			resizable="true"
+			draggable="true"
+            contentHeight="40%"
+            contentWidth="80%"> <!-- 사이즈 단위는 %(브라우저 크기에 따라 조정, px(작은 단위), rem, em -->
+        <content>
+            <HBox>
+                <Table id="idPOList2"
+                    inset="false"
+                    mode="SingleSelectMaster"
+                    items="{/results}">
+                    <columns>
+                        <Column>
+                            <Text text="구매오더번호"/>
+                        </Column>
+                        <Column>
+                            <Text text="벤더 정보" />
+                        </Column>
+                        <Column>
+                            <Text text="자재 정보" />
+                        </Column>
+                        <Column>
+                            <Text text="수량" />
+                        </Column>
+                        <Column>
+                            <Text text="구매 단가" />
+                        </Column>
+                        <Column>
+                            <Text text="총 비용" />
+                        </Column>
+                        <Column>
+                            <Text text="구매오더일자" />
+                        </Column>
+                        <Column>
+                            <Text text="입고예정일" />
+                        </Column>
+                        <Column>
+                            <Text text="이동유형" />
+                        </Column>							
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text=" {EBELN}" />
+                                <ObjectIdentifier title="{VENNM}" text=" {VENNR} "/>
+                                <ObjectIdentifier title="{MATNM}" text=" {MATNR} {MTART}"/>
+                                <Text text="{
+                                    path : 'QUANT',
+                                    formatter : '.formatter2.fnNumberString'} EA"  />
+                                <Text text="{
+                                    path : 'NETPR',
+                                    formatter : '.formatter2.fnNumberString'} KRW" />
+                                <Text text="{
+                                    path : 'TOAMT',
+                                    formatter : '.formatter2.fnNumberString'} KRW" />
+                                <Text text="{POITNO}" />
+                                <Text text="{ path: 'DDATE',
+                                              type: 'sap.ui.model.type.Date',
+                                              formatOptions: { pattern : 'yyyy-MM-dd'}}" />
+                                <Text text="{= ${BWART} === '001' ? '001: 원자재 미입고' : '101: 원자재 입고'}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </HBox>
+        </content>
+        <endButton>
+            <Button text="Close" press="onClose" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>
