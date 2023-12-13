@@ -29,6 +29,8 @@ sap.ui.define(
       },
 
       onInit: function () {
+        this.getOwnerComponent().getModel().setSizeLimit(99999);
+
         var oDatas = {
           list: [
             { BWART: "101 : 원자재 입고 (벤더 -> 창고)" },

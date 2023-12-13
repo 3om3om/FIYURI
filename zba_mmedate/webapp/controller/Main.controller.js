@@ -2,7 +2,7 @@ sap.ui.define(
   [
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/date/UI5Date",
+    // "sap/ui/core/date/UI5Date",
     "sap/ui/unified/library",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
@@ -14,7 +14,7 @@ sap.ui.define(
   function (
     Controller,
     JSONModel,
-    UI5Date,
+    // UI5Date,
     unifiedLibrary,
     Filter,
     FilterOperator,
@@ -25,10 +25,10 @@ sap.ui.define(
     // var CalendarDayType = unifiedLibrary.CalendarDayType;
 
     return Controller.extend("MM.zbammedate.controller.Main", {
-      DateFormatter: function (oDate) {
-        // 바인딩된 값이 oDate로 넣어짐
-        return UI5Date.getInstance(oDate); // 바인딩된 값을 UI5Date 형식으로 변환 후 리턴
-      },
+      // DateFormatter: function (oDate) {
+      //   // 바인딩된 값이 oDate로 넣어짐
+      //   return UI5Date.getInstance(oDate); // 바인딩된 값을 UI5Date 형식으로 변환 후 리턴
+      // },
 
       //formatter 객체 안에다 format function들을 넣고 관리
       formatter: {
@@ -61,6 +61,8 @@ sap.ui.define(
       },
 
       onInit: function () {
+        this.getOwnerComponent().getModel().setSizeLimit(99999);
+
         var oDatas = {
           list1: [{ MTART: "원자재" }, { MTART: "부자재" }],
           list2: [
